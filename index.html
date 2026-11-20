@@ -3,230 +3,146 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo Disney - Repositorios</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta name="description" content="Portfolio de proyectos de programación realizados por Mateo Quinteros.">
+  <title>Portfolio | Mateo Quinteros</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Montserrat', sans-serif;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+    html { scroll-behavior: smooth; }
     body {
-      background: linear-gradient(135deg, #090b13 0%, #1a1d29 100%);
-      color: #f9f9f9;
-      min-height: 100vh;
-      padding: 40px 20px;
+      background: radial-gradient(circle at top right, #172744 0, transparent 34%),
+                  linear-gradient(135deg, #090b13 0%, #151b29 100%);
+      color: #f7f8fc; min-height: 100vh; padding: 34px 22px 50px;
     }
-
-    .header {
-      text-align: center;
-      margin-bottom: 40px;
+    .hero {
+      max-width: 1120px; margin: 0 auto 52px; padding: 58px 48px;
+      border: 1px solid rgba(255,255,255,.12); border-radius: 22px;
+      background: linear-gradient(120deg, rgba(22,34,55,.94), rgba(12,18,30,.82));
+      box-shadow: 0 22px 60px rgba(0,0,0,.28); position: relative; overflow: hidden;
     }
-
-    .header h1 {
-      font-size: 2.8rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      background: linear-gradient(180deg, #ffffff 0%, #a2a8b9 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    .hero::after {
+      content: "</>"; position: absolute; right: 7%; top: 15%;
+      font-size: clamp(5rem, 13vw, 10rem); font-weight: 800;
+      color: rgba(93,174,255,.07); pointer-events: none;
     }
-
-    .header p {
-      color: #f9f9f980;
-      font-size: 1rem;
-      margin-top: 8px;
-    }
-
-    /* Buscador mágico */
-    .search-container {
-      max-width: 600px;
-      margin: 0 auto 40px auto;
-      display: flex;
-      gap: 12px;
-    }
-
+    .eyebrow { color: #64c7ff; font-size: .78rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 18px; }
+    .hero h1 { font-size: clamp(2.3rem, 6vw, 4.2rem); line-height: 1.08; font-weight: 800; letter-spacing: -2px; max-width: 720px; }
+    .hero h1 span { color: #65c7ff; }
+    .hero p { color: #b7c2d5; line-height: 1.8; font-size: 1rem; max-width: 690px; margin-top: 22px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+    .hero-meta span { border: 1px solid rgba(101,199,255,.28); background: rgba(101,199,255,.08); color: #bdeaff; padding: 8px 13px; border-radius: 30px; font-size: .78rem; }
+    .section-heading { max-width: 1120px; margin: 0 auto 22px; }
+    .section-heading h2 { font-size: 1.65rem; margin-bottom: 8px; }
+    .section-heading p { color: #9daac0; font-size: .9rem; }
+    .search-container { max-width: 1120px; margin: 0 auto 28px; }
     .search-container input {
-      flex: 1;
-      padding: 14px 20px;
-      border-radius: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-      font-size: 1rem;
-      outline: none;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
+      width: 100%; padding: 15px 20px; border-radius: 13px;
+      border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.07);
+      color: #fff; font-size: .95rem; outline: none; transition: .25s;
     }
-
-    .search-container input:focus {
-      border-color: #0072d2;
-      box-shadow: 0 0 15px rgba(0, 114, 210, 0.5);
-      background: rgba(255, 255, 255, 0.12);
-    }
-
-    /* Galería de Tarjetas / Pósters */
+    .search-container input:focus { border-color: #399fe8; box-shadow: 0 0 0 3px rgba(57,159,232,.14); }
+    .search-container input::placeholder { color: #8491a8; }
     .catalog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 25px;
-      max-width: 1200px;
-      margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+      gap: 22px; max-width: 1120px; margin: 0 auto;
     }
-
-    .movie-card {
-      background: #192133;
-      border-radius: 12px;
-      overflow: hidden;
-      position: relative;
-      border: 3px solid transparent;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-      transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
+    .project-card {
+      background: linear-gradient(160deg, #1b2940, #131c2c);
+      border: 1px solid rgba(255,255,255,.09); border-radius: 17px;
+      padding: 23px; min-height: 275px; display: flex; flex-direction: column;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
     }
-
-    .movie-card:hover {
-      transform: scale(1.06);
-      border-color: rgba(249, 249, 249, 0.8);
-      box-shadow: 0 18px 30px rgba(0,0,0,0.8), 0 0 20px rgba(255, 255, 255, 0.2);
-    }
-
-    .poster-wrapper {
-      width: 100%;
-      height: 260px;
-      background-color: #0c111b;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .poster-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .movie-card:hover .poster-wrapper img {
-      transform: scale(1.08);
-    }
-
-    .card-info {
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-      justify-content: space-between;
-    }
-
-    .card-info h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #fff;
-      text-transform: capitalize;
-    }
-
-    .card-info p {
-      font-size: 0.85rem;
-      color: #a2a8b9;
-      margin-bottom: 12px;
-      line-height: 1.3;
-    }
-
-    .card-tags {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    .lang-tag {
-      background: rgba(0, 114, 210, 0.2);
-      color: #00d2ff;
-      padding: 4px 10px;
-      border-radius: 12px;
-      border: 1px solid rgba(0, 210, 255, 0.3);
-    }
-
-    .stars-tag {
-      color: #ffc107;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .no-results {
-      grid-column: 1 / -1;
-      text-align: center;
-      color: #a2a8b9;
-      padding: 50px;
-      font-size: 1.2rem;
+    .project-card:hover { transform: translateY(-6px); border-color: rgba(101,199,255,.55); box-shadow: 0 18px 34px rgba(0,0,0,.28); }
+    .project-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+    .project-icon { width: 45px; height: 45px; display: grid; place-items: center; border-radius: 12px; background: rgba(101,199,255,.12); color: #72d1ff; font-size: 1.15rem; font-weight: 800; }
+    .lang-tag { color: #a9e4ff; background: rgba(0,160,230,.12); border: 1px solid rgba(0,190,255,.2); padding: 6px 10px; border-radius: 20px; font-size: .7rem; font-weight: 700; }
+    .project-card h3 { font-size: 1.15rem; margin-bottom: 11px; }
+    .project-card p { color: #aebbd0; font-size: .86rem; line-height: 1.65; margin-bottom: 18px; }
+    .topics { color: #8292aa; font-size: .73rem; line-height: 1.6; margin-top: auto; padding-top: 13px; border-top: 1px solid rgba(255,255,255,.08); }
+    .repo-link { display: inline-flex; align-items: center; gap: 8px; color: #72d1ff; text-decoration: none; font-size: .83rem; font-weight: 700; margin-top: 17px; }
+    .repo-link:hover { color: #fff; }
+    .no-results { grid-column: 1 / -1; text-align: center; color: #a2a8b9; padding: 45px 15px; }
+    footer { max-width: 1120px; margin: 48px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.09); color: #77859b; text-align: center; font-size: .78rem; }
+    @media (max-width: 600px) {
+      body { padding: 18px 14px 35px; }
+      .hero { padding: 38px 24px; margin-bottom: 38px; }
+      .hero h1 { letter-spacing: -1px; }
+      .hero::after { right: 3%; top: 5%; }
     }
   </style>
 </head>
 <body>
+  <header class="hero">
+    <div class="eyebrow">Portfolio de programación</div>
+    <h1>Hola, soy <span>Mateo Quinteros</span></h1>
+    <p>
+      Este sitio reúne algunos de los trabajos y ejercicios de programación que realicé
+      durante el año. En cada repositorio se pueden conocer los temas que practiqué,
+      los problemas que resolví y las herramientas que utilicé, principalmente con Python.
+    </p>
+    <div class="hero-meta">
+      <span>Proyectos personales y académicos</span>
+      <span>Python</span>
+      <span>Datos y programación</span>
+    </div>
+  </header>
 
-  <div class="header">
-    <h1>Colección de Repositorios</h1>
-    <p>Explora el catálogo oficial de proyectos</p>
-  </div>
+  <main>
+    <section class="section-heading">
+      <h2>Mis proyectos</h2>
+      <p>Seleccioná un proyecto para abrir su repositorio en GitHub y ver sus archivos.</p>
+    </section>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Buscar por proyecto, tema o lenguaje..." aria-label="Buscar proyectos">
+    </div>
+    <section class="catalog-grid" id="catalogGrid" aria-live="polite"></section>
+  </main>
 
-  <div class="search-container">
-    <input type="text" id="searchInput" placeholder="Buscar título o categoría...">
-  </div>
-
-  <div class="catalog-grid" id="catalogGrid">
-  </div>
+  <footer>Portfolio realizado por Mateo Quinteros · GitHub: mateo1288</footer>
 
   <script>
-    const USERNAME = 'mateo1288';
-
     const allRepos = [
       {
-        name: 'recursividad',
-        description: 'Ejercicios y lógica de recursividad',
+        name: 'Recursividad',
+        repo: 'recursibidad-',
+        description: 'Repositorio dedicado a practicar la recursividad en Python. Incluye una explicación del concepto y un ejemplo de una función factorial que se llama a sí misma hasta llegar a un caso base.',
         language: 'Python',
-        stars: 0,
-        image: 'recursibidad-.png'
+        icon: 'ƒ',
+        topics: 'Temas: funciones recursivas · caso base · factorial'
       },
       {
-        name: 'graficas',
-        description: 'Visualización de datos e histogramas',
+        name: 'Gráficos',
+        repo: 'graficos',
+        description: 'Colección de ejemplos para crear y explorar distintos tipos de gráficos a partir de datos. Incluye archivos para gráficos de barras, líneas, dispersión, cajas, mapas de calor, histogramas de densidad y otras visualizaciones.',
         language: 'Python',
-        stars: 0,
-        image: 'graficas.png'
+        icon: '▥',
+        topics: 'Temas: visualización de datos · Matplotlib · Seaborn'
       },
       {
         name: 'CSV',
-        description: 'Gestión de datos de usuarios',
+        repo: 'csv',
+        description: 'Ejercicios de lectura y análisis de archivos CSV con Python y Pandas. Se trabaja con tablas de datos para consultar filas y columnas, ordenar información, revisar tipos de datos, detectar valores vacíos y realizar cálculos.',
         language: 'Python',
-        stars: 0,
-        image: 'CSV.png'
+        icon: '▤',
+        topics: 'Temas: Pandas · archivos CSV · filtrado · análisis de datos'
       },
       {
-        name: 'prueba',
-        description: 'Repositorio de evaluaciones',
+        name: 'Examen',
+        repo: 'examen',
+        description: 'Repositorio con ejercicios de evaluación sobre el manejo de archivos CSV. Los programas utilizan Pandas para seleccionar columnas de un conjunto de datos, mostrar determinadas filas, contar registros y realizar operaciones básicas.',
         language: 'Python',
-        stars: 0,
-        image: 'examen.jfif'
+        icon: '✓',
+        topics: 'Temas: Pandas · lectura de datos · consultas · ejercicios prácticos'
       },
       {
-        name: 'IA',
-        description: 'Inteligencia artificial',
+        name: 'Inteligencia Artificial',
+        repo: 'ia',
+        description: 'Material de estudio sobre inteligencia artificial y sus áreas relacionadas. Reúne conceptos de Machine Learning, tipos y clasificaciones de IA, Markdown y la utilidad de bibliotecas de Python para trabajar con datos y gráficos.',
         language: 'Python',
-        stars: 0,
-        image: 'ia.png'
+        icon: 'AI',
+        topics: 'Temas: Inteligencia Artificial · Machine Learning · NumPy · Pandas · Matplotlib'
       }
     ];
 
@@ -235,52 +151,42 @@
       grid.innerHTML = '';
 
       if (repos.length === 0) {
-        grid.innerHTML = `<div class="no-results">No se encontraron títulos.</div>`;
+        grid.innerHTML = '<div class="no-results">No se encontraron proyectos.</div>';
         return;
       }
 
       repos.forEach(repo => {
-        const repoUrl = `https://github.com/${USERNAME}/${repo.name}`;
-        
-        const card = document.createElement('a');
-        card.className = 'movie-card';
-        card.href = repoUrl;
-        card.target = '_blank';
-
+        const card = document.createElement('article');
+        card.className = 'project-card';
         card.innerHTML = `
-          <div class="poster-wrapper">
-            <img src="${repo.image}" alt="${repo.name}" onerror="this.src='https://via.placeholder.com/220x260/192133/ffffff?text=${repo.name}'">
+          <div class="project-top">
+            <div class="project-icon" aria-hidden="true">${repo.icon}</div>
+            <span class="lang-tag">${repo.language}</span>
           </div>
-          <div class="card-info">
-            <div>
-              <h3>${repo.name}</h3>
-              <p>${repo.description}</p>
-            </div>
-            <div class="card-tags">
-              <span class="lang-tag">${repo.language}</span>
-              <span class="stars-tag">★ ${repo.stars}</span>
-            </div>
-          </div>
+          <h3>${repo.name}</h3>
+          <p>${repo.description}</p>
+          <div class="topics">${repo.topics}</div>
+          <a class="repo-link" href="https://github.com/mateo1288/${repo.repo}" target="_blank" rel="noopener noreferrer">
+            Ver repositorio <span aria-hidden="true">↗</span>
+          </a>
         `;
-        
         grid.appendChild(card);
       });
     }
 
     function filterRepos() {
       const query = document.getElementById('searchInput').value.toLowerCase().trim();
-      const filtered = allRepos.filter(repo => 
+      const filtered = allRepos.filter(repo =>
         repo.name.toLowerCase().includes(query) ||
         repo.description.toLowerCase().includes(query) ||
-        repo.language.toLowerCase().includes(query)
+        repo.language.toLowerCase().includes(query) ||
+        repo.topics.toLowerCase().includes(query)
       );
       renderCatalog(filtered);
     }
 
     document.getElementById('searchInput').addEventListener('input', filterRepos);
-
     renderCatalog(allRepos);
   </script>
-
 </body>
 </html>
