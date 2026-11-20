@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio de proyectos de programación realizados por Mateo Quinteros.">
+  <title>Portfolio | Mateo Quinteros</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: radial-gradient(circle at top right, #172744 0, transparent 34%),
+                  linear-gradient(135deg, #090b13 0%, #151b29 100%);
+      color: #f7f8fc; min-height: 100vh; padding: 34px 22px 50px;
+    }
+    .hero {
+      max-width: 1120px; margin: 0 auto 52px; padding: 58px 48px;
+      border: 1px solid rgba(255,255,255,.12); border-radius: 22px;
+      background: linear-gradient(120deg, rgba(22,34,55,.94), rgba(12,18,30,.82));
+      box-shadow: 0 22px 60px rgba(0,0,0,.28); position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: "</>"; position: absolute; right: 7%; top: 15%;
+      font-size: clamp(5rem, 13vw, 10rem); font-weight: 800;
+      color: rgba(93,174,255,.07); pointer-events: none;
+    }
+    .eyebrow { color: #64c7ff; font-size: .78rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 18px; }
+    .hero h1 { font-size: clamp(2.3rem, 6vw, 4.2rem); line-height: 1.08; font-weight: 800; letter-spacing: -2px; max-width: 720px; }
+    .hero h1 span { color: #65c7ff; }
+    .hero p { color: #b7c2d5; line-height: 1.8; font-size: 1rem; max-width: 690px; margin-top: 22px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+    .hero-meta span { border: 1px solid rgba(101,199,255,.28); background: rgba(101,199,255,.08); color: #bdeaff; padding: 8px 13px; border-radius: 30px; font-size: .78rem; }
+    .section-heading { max-width: 1120px; margin: 0 auto 22px; }
+    .section-heading h2 { font-size: 1.65rem; margin-bottom: 8px; }
+    .section-heading p { color: #9daac0; font-size: .9rem; }
+    .search-container { max-width: 1120px; margin: 0 auto 28px; }
+    .search-container input {
+      width: 100%; padding: 15px 20px; border-radius: 13px;
+      border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.07);
+      color: #fff; font-size: .95rem; outline: none; transition: .25s;
+    }
+    .search-container input:focus { border-color: #399fe8; box-shadow: 0 0 0 3px rgba(57,159,232,.14); }
+    .search-container input::placeholder { color: #8491a8; }
+    .catalog-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+      gap: 22px; max-width: 1120px; margin: 0 auto;
+    }
+    .project-card {
+      background: linear-gradient(160deg, #1b2940, #131c2c);
+      border: 1px solid rgba(255,255,255,.09); border-radius: 17px;
+      padding: 23px; min-height: 275px; display: flex; flex-direction: column;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+    }
+    .project-card:hover { transform: translateY(-6px); border-color: rgba(101,199,255,.55); box-shadow: 0 18px 34px rgba(0,0,0,.28); }
+    .project-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+    .project-icon { width: 45px; height: 45px; display: grid; place-items: center; border-radius: 12px; background: rgba(101,199,255,.12); color: #72d1ff; font-size: 1.15rem; font-weight: 800; }
+    .lang-tag { color: #a9e4ff; background: rgba(0,160,230,.12); border: 1px solid rgba(0,190,255,.2); padding: 6px 10px; border-radius: 20px; font-size: .7rem; font-weight: 700; }
+    .project-card h3 { font-size: 1.15rem; margin-bottom: 11px; }\n    .project-title-link { color: #f7f8fc; text-decoration: none; }\n    .project-title-link:hover { color: #72d1ff; text-decoration: underline; }
+    .project-card p { color: #aebbd0; font-size: .86rem; line-height: 1.65; margin-bottom: 18px; }
+    .topics { color: #8292aa; font-size: .73rem; line-height: 1.6; margin-top: auto; padding-top: 13px; border-top: 1px solid rgba(255,255,255,.08); }
+    .repo-link { display: inline-flex; align-items: center; gap: 8px; color: #72d1ff; text-decoration: none; font-size: .83rem; font-weight: 700; margin-top: 17px; }
+    .repo-link:hover { color: #fff; }
+    .no-results { grid-column: 1 / -1; text-align: center; color: #a2a8b9; padding: 45px 15px; }
+    footer { max-width: 1120px; margin: 48px auto 0; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.09); color: #77859b; text-align: center; font-size: .78rem; }
+    @media (max-width: 600px) {
+      body { padding: 18px 14px 35px; }
+      .hero { padding: 38px 24px; margin-bottom: 38px; }
+      .hero h1 { letter-spacing: -1px; }
+      .hero::after { right: 3%; top: 5%; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="eyebrow">Portfolio de programación</div>
+    <h1>Hola, soy <span>Mateo Quinteros</span></h1>
+    <p>
+      Este sitio reúne algunos de los trabajos y ejercicios de programación que realicé
+      durante el año. En cada repositorio se pueden conocer los temas que practiqué,
+      los problemas que resolví y las herramientas que utilicé, principalmente con Python.
+    </p>
+    <div class="hero-meta">
+      <span>Proyectos personales y académicos</span>
+      <span>Python</span>
+      <span>Datos y programación</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-heading">
+      <h2>Mis proyectos</h2>
+      <p>Seleccioná el nombre o el enlace de un proyecto para abrir su repositorio en GitHub.</p>
+    </section>
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Buscar por proyecto, tema o lenguaje..." aria-label="Buscar proyectos">
+    </div>
+    <section class="catalog-grid" id="catalogGrid" aria-live="polite"></section>
+  </main>
+
+  <footer>Portfolio realizado por Mateo Quinteros · GitHub: mateo1288</footer>
+
+  <script>
+    const allRepos = [
+      {
+        name: 'Recursividad',
+        repo: 'recursibidad-',
+        description: 'Repositorio dedicado a practicar la recursividad en Python. Incluye una explicación del concepto y un ejemplo de una función factorial que se llama a sí misma hasta llegar a un caso base.',
+        language: 'Python',
+        icon: 'ƒ',
+        topics: 'Temas: funciones recursivas · caso base · factorial'
+      },
+      {
+        name: 'Gráficos',
+        repo: 'graficos',
+        description: 'Colección de ejemplos para crear y explorar distintos tipos de gráficos a partir de datos. Incluye archivos para gráficos de barras, líneas, dispersión, cajas, mapas de calor, histogramas de densidad y otras visualizaciones.',
+        language: 'Python',
+        icon: '▥',
+        topics: 'Temas: visualización de datos · Matplotlib · Seaborn'
+      },
+      {
+        name: 'CSV',
+        repo: 'csv',
+        description: 'Ejercicios de lectura y análisis de archivos CSV con Python y Pandas. Se trabaja con tablas de datos para consultar filas y columnas, ordenar información, revisar tipos de datos, detectar valores vacíos y realizar cálculos.',
+        language: 'Python',
+        icon: '▤',
+        topics: 'Temas: Pandas · archivos CSV · filtrado · análisis de datos'
+      },
+      {
+        name: 'Examen',
+        repo: 'examen',
+        description: 'Repositorio con ejercicios de evaluación sobre el manejo de archivos CSV. Los programas utilizan Pandas para seleccionar columnas de un conjunto de datos, mostrar determinadas filas, contar registros y realizar operaciones básicas.',
+        language: 'Python',
+        icon: '✓',
+        topics: 'Temas: Pandas · lectura de datos · consultas · ejercicios prácticos'
+      },
+      {
+        name: 'Inteligencia Artificial',
+        repo: 'ia',
+        description: 'Material de estudio sobre inteligencia artificial y sus áreas relacionadas. Reúne conceptos de Machine Learning, tipos y clasificaciones de IA, Markdown y la utilidad de bibliotecas de Python para trabajar con datos y gráficos.',
+        language: 'Python',
+        icon: 'AI',
+        topics: 'Temas: Inteligencia Artificial · Machine Learning · NumPy · Pandas · Matplotlib'
+      }
+    ];
+
+    function renderCatalog(repos) {
+      const grid = document.getElementById('catalogGrid');
+      grid.innerHTML = '';
+
+      if (repos.length === 0) {
+        grid.innerHTML = '<div class="no-results">No se encontraron proyectos.</div>';
+        return;
+      }
+
+      repos.forEach(repo => {
+        const card = document.createElement('article');
+        card.className = 'project-card';
+        card.innerHTML = `
+          <div class="project-top">
+            <div class="project-icon" aria-hidden="true">${repo.icon}</div>
+            <span class="lang-tag">${repo.language}</span>
+          </div>
+          <h3><a class="project-title-link" href="https://github.com/mateo1288/${repo.repo}" target="_blank" rel="noopener noreferrer">${repo.name}</a></h3>
+          <p>${repo.description}</p>
+          <div class="topics">${repo.topics}</div>
+          <a class="repo-link" href="https://github.com/mateo1288/${repo.repo}" target="_blank" rel="noopener noreferrer">
+            Ver repositorio <span aria-hidden="true">↗</span>
+          </a>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterRepos() {
+      const query = document.getElementById('searchInput').value.toLowerCase().trim();
+      const filtered = allRepos.filter(repo =>
+        repo.name.toLowerCase().includes(query) ||
+        repo.description.toLowerCase().includes(query) ||
+        repo.language.toLowerCase().includes(query) ||
+        repo.topics.toLowerCase().includes(query)
+      );
+      renderCatalog(filtered);
+    }
+
+    document.getElementById('searchInput').addEventListener('input', filterRepos);
+    renderCatalog(allRepos);
+  </script>
+</body>
+</html>
